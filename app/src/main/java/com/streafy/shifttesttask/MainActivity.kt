@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import com.streafy.shifttesttask.domain.entity.User
 import com.streafy.shifttesttask.presentation.userlist.UserListScreen
 import com.streafy.shifttesttask.ui.theme.ShifttesttaskTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
