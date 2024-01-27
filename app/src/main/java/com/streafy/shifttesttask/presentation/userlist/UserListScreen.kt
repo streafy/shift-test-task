@@ -7,21 +7,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.streafy.shifttesttask.domain.entity.User
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun UserListScreen(
-    users: List<User>
+    viewModel: UserListViewModel = viewModel()
 ) {
+    val users by viewModel.state.collectAsStateWithLifecycle()
+
     LazyColumn(
         Modifier.padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(users) {
-            UserCard(user = it, modifier = Modifier.fillMaxWidth())
+        items(users) { user ->
+            UserCard(user = user, modifier = Modifier.fillMaxWidth())
         }
     }
 }
@@ -32,16 +36,5 @@ fun UserListScreen(
 )
 @Composable
 fun UserListScreenPreview() {
-    val mockData = List(10) { index ->
-        User(
-            firstName = "Test",
-            lastName = "User",
-            photoUri = "https://randomuser.me/api/portraits/women/$index.jpg",
-            address = "test address",
-            phoneNumber = "098-66732533"
-        )
-    }
-    UserListScreen(
-        mockData
-    )
+    UserListScreen()
 }
