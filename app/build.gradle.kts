@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.android.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.serialization)
+
 }
 
 android {
@@ -56,6 +58,8 @@ dependencies {
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
@@ -76,4 +80,15 @@ dependencies {
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+
+    //Kotlinx Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    //Paging
+    implementation(libs.androidx.paging.compose)
+
 }
