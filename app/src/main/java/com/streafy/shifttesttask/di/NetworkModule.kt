@@ -2,8 +2,6 @@ package com.streafy.shifttesttask.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.streafy.shifttesttask.data.remote.UserApi
-import com.streafy.shifttesttask.data.repository.UserRepositoryImpl
-import com.streafy.shifttesttask.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,10 +31,6 @@ class NetworkModule {
     @Singleton
     fun provideUserApi(retrofit: Retrofit): UserApi =
         retrofit.create(UserApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideUserRepository(userApi: UserApi): UserRepository = UserRepositoryImpl(userApi)
 
     companion object {
 
