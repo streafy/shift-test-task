@@ -52,4 +52,7 @@ class UserRemoteMediator(
             MediatorResult.Error(e)
         }
     }
+
+    override suspend fun initialize(): InitializeAction =
+        InitializeAction.SKIP_INITIAL_REFRESH
 }
