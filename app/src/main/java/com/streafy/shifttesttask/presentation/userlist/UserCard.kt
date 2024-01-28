@@ -100,7 +100,8 @@ fun UserCardPreview() {
         lastName = "lastName",
         photoUri = "https://randomuser.me/api/portraits/med/women/1.jpg",
         address = "test address",
-        phoneNumber = "098-66732533"
+        phoneNumber = "098-66732533",
+        id = 1
     )
     UserCard(
         user = mockUser, modifier = Modifier
