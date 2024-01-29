@@ -22,7 +22,7 @@ import com.streafy.shifttesttask.domain.entity.UserWithDetails
 @Composable
 fun UserDetailsCard(
     user: UserWithDetails,
-    orientation: Int = Configuration.ORIENTATION_LANDSCAPE
+    orientation: Int = Configuration.ORIENTATION_PORTRAIT
 ) {
     ElevatedCard(
         modifier = Modifier.fillMaxWidth(),
