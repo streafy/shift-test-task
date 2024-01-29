@@ -1,6 +1,7 @@
 package com.streafy.shifttesttask.presentation.userdetails
 
 import android.content.res.Configuration
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -22,7 +23,10 @@ import com.streafy.shifttesttask.domain.entity.UserWithDetails
 @Composable
 fun UserDetailsCard(
     user: UserWithDetails,
-    orientation: Int = Configuration.ORIENTATION_PORTRAIT
+    orientation: Int = Configuration.ORIENTATION_PORTRAIT,
+    onPhoneNumberClick: (String) -> Unit,
+    onAddressClick: (String) -> Unit,
+    onEmailCLick: (String) -> Unit
 ) {
     ElevatedCard(
         modifier = Modifier.fillMaxWidth(),
@@ -31,16 +35,29 @@ fun UserDetailsCard(
         )
     ) {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            HorizontalContent(user = user)
+            HorizontalContent(
+                user = user,
+                onPhoneNumberClick = onPhoneNumberClick,
+                onAddressClick = onAddressClick,
+                onEmailCLick = onEmailCLick
+            )
         } else {
-            VerticalContent(user = user)
+            VerticalContent(
+                user = user,
+                onPhoneNumberClick = onPhoneNumberClick,
+                onAddressClick = onAddressClick,
+                onEmailCLick = onEmailCLick
+            )
         }
     }
 }
 
 @Composable
 private fun VerticalContent(
-    user: UserWithDetails
+    user: UserWithDetails,
+    onPhoneNumberClick: (String) -> Unit,
+    onAddressClick: (String) -> Unit,
+    onEmailCLick: (String) -> Unit
 ) {
     AsyncImage(
         model = user.photoUri,
@@ -49,12 +66,20 @@ private fun VerticalContent(
             .fillMaxWidth(),
         contentScale = ContentScale.FillWidth
     )
-    UserInfo(user)
+    UserInfo(
+        user = user,
+        onPhoneNumberClick = onPhoneNumberClick,
+        onAddressClick = onAddressClick,
+        onEmailCLick = onEmailCLick
+    )
 }
 
 @Composable
 private fun HorizontalContent(
-    user: UserWithDetails
+    user: UserWithDetails,
+    onPhoneNumberClick: (String) -> Unit,
+    onAddressClick: (String) -> Unit,
+    onEmailCLick: (String) -> Unit
 ) {
     Row {
         AsyncImage(
@@ -64,13 +89,21 @@ private fun HorizontalContent(
                 .fillMaxHeight(),
             contentScale = ContentScale.FillHeight
         )
-        UserInfo(user)
+        UserInfo(
+            user = user,
+            onPhoneNumberClick = onPhoneNumberClick,
+            onAddressClick = onAddressClick,
+            onEmailCLick = onEmailCLick
+        )
     }
 }
 
 @Composable
 private fun UserInfo(
     user: UserWithDetails,
+    onPhoneNumberClick: (String) -> Unit,
+    onAddressClick: (String) -> Unit,
+    onEmailCLick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -80,8 +113,9 @@ private fun UserInfo(
     ) {
         InfoField(name = "Full name", content = "${user.firstName} ${user.lastName}")
         InfoField(name = "Gender", content = user.gender)
-        InfoField(name = "Phone", content = user.phoneNumber)
-        InfoField(name = "Address", content = user.address)
+        InfoField(name = "Phone", content = user.phoneNumber, onClick = onPhoneNumberClick)
+        InfoField(name = "Address", content = user.address, onClick = onAddressClick)
+        InfoField(name = "Email", content = "test@test.com", onClick = onEmailCLick)
         InfoField(name = "Date of birth", content = user.dateOfBirth)
         InfoField(name = "Registered", content = user.registered)
     }
@@ -90,9 +124,10 @@ private fun UserInfo(
 @Composable
 private fun InfoField(
     name: String,
-    content: String
+    content: String,
+    onClick: (String) -> Unit = {}
 ) {
-    Column {
+    Column(modifier = Modifier.clickable { onClick(content) }) {
         Text(text = name, style = MaterialTheme.typography.titleSmall)
         Text(text = content, style = MaterialTheme.typography.bodyMedium)
     }

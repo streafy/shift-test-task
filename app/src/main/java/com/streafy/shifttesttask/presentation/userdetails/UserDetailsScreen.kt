@@ -1,5 +1,8 @@
 package com.streafy.shifttesttask.presentation.userdetails
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +22,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -36,11 +40,15 @@ fun UserDetailsScreen(
         viewModel.loadUser(id)
     }
 
+    val context = LocalContext.current
     when (val stateValue = state.value) {
         is UserDetailsUiState.Content ->
             Content(
                 user = stateValue.user,
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
+                onPhoneNumberClick = { phoneNumber -> dialPhoneNumber(phoneNumber, context) },
+                onAddressClick = { address -> showMap(address, context) },
+                onEmailCLick = { email -> sendEmailTo(email, context) }
             )
         is UserDetailsUiState.Error ->
             ErrorContent(
@@ -55,7 +63,10 @@ fun UserDetailsScreen(
 @Composable
 private fun Content(
     user: UserWithDetails,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onPhoneNumberClick: (phoneNumber: String) -> Unit,
+    onAddressClick: (address: String) -> Unit,
+    onEmailCLick: (email: String) -> Unit
 ) {
     Column(
         modifier = Modifier.padding(horizontal = 16.dp),
@@ -63,7 +74,13 @@ private fun Content(
     ) {
         TopBar(onBackClick)
         val orientation = LocalConfiguration.current.orientation
-        UserDetailsCard(user = user, orientation = orientation)
+        UserDetailsCard(
+            user = user,
+            orientation = orientation,
+            onPhoneNumberClick = onPhoneNumberClick,
+            onAddressClick = onAddressClick,
+            onEmailCLick = onEmailCLick
+        )
     }
 }
 
@@ -116,5 +133,35 @@ private fun ErrorContent(
         Button(onClick = onRetry) {
             Text(text = "Retry")
         }
+    }
+}
+
+private fun dialPhoneNumber(phoneNumber: String, context: Context) {
+    val intent = Intent(Intent.ACTION_DIAL).apply {
+        data = Uri.parse("tel:$phoneNumber")
+    }
+    if (intent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(intent)
+    }
+}
+
+private fun showMap(address: String, context: Context) {
+    val encodedAddress = Uri.encode(address)
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        data = Uri.parse("geo:0,0?q=$encodedAddress")
+    }
+    if (intent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(intent)
+    }
+}
+
+private fun sendEmailTo(email: String, context: Context) {
+    val intent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:")
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+    }
+
+    if (intent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(intent)
     }
 }
