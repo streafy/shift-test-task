@@ -109,7 +109,9 @@ private fun UserList(
                     onClick = { onUserClick(user) }
                 )
             } else {
-                //TODO: add placeholder
+                UserCardPlaceholder(
+                    cardWidthFraction = cardWidthFraction
+                )
             }
         }
 
