@@ -75,7 +75,7 @@ private fun UserInfo(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(12.dp)
+            .padding(15.dp)
             .verticalScroll(rememberScrollState()),
     ) {
         InfoField(name = "Full name", content = "${user.firstName} ${user.lastName}")
