@@ -1,6 +1,7 @@
 package com.streafy.shifttesttask.di
 
 import androidx.paging.Pager
+import com.streafy.shifttesttask.data.local.UserDatabase
 import com.streafy.shifttesttask.data.local.UserEntity
 import com.streafy.shifttesttask.data.repository.UserRepositoryImpl
 import com.streafy.shifttesttask.domain.repository.UserRepository
@@ -16,6 +17,9 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideRepository(pager: Pager<Int, UserEntity>): UserRepository =
-        UserRepositoryImpl(pager = pager)
+    fun provideRepository(pager: Pager<Int, UserEntity>, database: UserDatabase): UserRepository =
+        UserRepositoryImpl(
+            pager = pager,
+            database = database
+        )
 }

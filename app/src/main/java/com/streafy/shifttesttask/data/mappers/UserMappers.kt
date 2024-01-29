@@ -5,7 +5,7 @@ import com.streafy.shifttesttask.data.remote.model.LocationDto
 import com.streafy.shifttesttask.data.remote.model.RemoteResponse
 import com.streafy.shifttesttask.data.utils.Config
 import com.streafy.shifttesttask.domain.entity.User
-
+import com.streafy.shifttesttask.domain.entity.UserWithDetails
 
 fun RemoteResponse.toUserEntityList() =
     results.mapIndexed { index, userDto ->
@@ -33,6 +33,19 @@ fun UserEntity.toUser() =
         photoUri = pictureUri,
         address = location,
         phoneNumber = phone
+    )
+
+fun UserEntity.toUserWithDetails() =
+    UserWithDetails(
+        id = id,
+        firstName = firstName,
+        lastName = lastName,
+        photoUri = pictureUri,
+        address = location,
+        phoneNumber = phone,
+        dateOfBirth = dateOfBirth,
+        registered = registered,
+        gender = gender
     )
 
 private fun LocationDto.toAddressString() =
