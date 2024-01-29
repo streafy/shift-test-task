@@ -1,8 +1,5 @@
 package com.streafy.shifttesttask.presentation.userdetails
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.streafy.shifttesttask.domain.entity.UserWithDetails
+import com.streafy.shifttesttask.presentation.userdetails.intentactions.dialPhoneNumber
+import com.streafy.shifttesttask.presentation.userdetails.intentactions.sendEmailTo
+import com.streafy.shifttesttask.presentation.userdetails.intentactions.showMap
 
 @Composable
 fun UserDetailsScreen(
@@ -133,35 +133,5 @@ private fun ErrorContent(
         Button(onClick = onRetry) {
             Text(text = "Retry")
         }
-    }
-}
-
-private fun dialPhoneNumber(phoneNumber: String, context: Context) {
-    val intent = Intent(Intent.ACTION_DIAL).apply {
-        data = Uri.parse("tel:$phoneNumber")
-    }
-    if (intent.resolveActivity(context.packageManager) != null) {
-        context.startActivity(intent)
-    }
-}
-
-private fun showMap(address: String, context: Context) {
-    val encodedAddress = Uri.encode(address)
-    val intent = Intent(Intent.ACTION_VIEW).apply {
-        data = Uri.parse("geo:0,0?q=$encodedAddress")
-    }
-    if (intent.resolveActivity(context.packageManager) != null) {
-        context.startActivity(intent)
-    }
-}
-
-private fun sendEmailTo(email: String, context: Context) {
-    val intent = Intent(Intent.ACTION_SENDTO).apply {
-        data = Uri.parse("mailto:")
-        putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-    }
-
-    if (intent.resolveActivity(context.packageManager) != null) {
-        context.startActivity(intent)
     }
 }
