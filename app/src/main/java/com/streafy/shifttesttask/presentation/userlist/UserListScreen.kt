@@ -92,7 +92,7 @@ private fun UserList(
                 style = MaterialTheme.typography.headlineLarge
             )
         }
-        items(users.itemCount, key = { index -> users[index]?.id ?: -1 }) { index ->
+        items(users.itemCount) { index ->
             val user = users[index]
             if (user != null) {
                 UserCard(
