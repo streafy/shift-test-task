@@ -46,7 +46,8 @@ fun UserEntity.toUserWithDetails() =
         phoneNumber = phone,
         dateOfBirth = dateOfBirth,
         registered = registered,
-        gender = gender
+        gender = gender,
+        email = email
     )
 
 private fun LocationDto.toAddressString() =
