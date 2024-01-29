@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -76,10 +79,27 @@ private fun UserInfo(
     Column(
         verticalArrangement = Arrangement.Center,
     ) {
-        Text(text = "$firstName $lastName", style = MaterialTheme.typography.titleLarge)
-        Text(text = phoneNumber)
-        Text(text = address)
+
+        UserInfoField(
+            text = "$firstName $lastName",
+            style = MaterialTheme.typography.titleLarge
+        )
+        UserInfoField(text = phoneNumber)
+        UserInfoField(text = address)
     }
+}
+
+@Composable
+private fun UserInfoField(
+    text: String,
+    style: TextStyle = LocalTextStyle.current
+) {
+    Text(
+        text = text,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 1,
+        style = style
+    )
 }
 
 @Preview(
