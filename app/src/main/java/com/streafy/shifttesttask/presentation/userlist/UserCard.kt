@@ -27,9 +27,11 @@ import com.streafy.shifttesttask.domain.entity.User
 @Composable
 fun UserCard(
     user: User,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     ElevatedCard(
+        onClick = onClick,
         modifier = modifier,
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp

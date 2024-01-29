@@ -22,7 +22,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -31,7 +31,8 @@ import com.streafy.shifttesttask.domain.entity.User
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserListScreen(
-    viewModel: UserListViewModel = viewModel()
+    viewModel: UserListViewModel = hiltViewModel(),
+    onUserClick: (user: User) -> Unit = {}
 ) {
     val users = viewModel.state.collectAsLazyPagingItems()
 
@@ -62,7 +63,10 @@ fun UserListScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
         } else {
-            UserList(users)
+            UserList(
+                users = users,
+                onUserClick = onUserClick
+            )
             PullToRefreshContainer(
                 modifier = Modifier.align(Alignment.TopCenter),
                 state = state,
@@ -72,7 +76,10 @@ fun UserListScreen(
 }
 
 @Composable
-private fun UserList(users: LazyPagingItems<User>) {
+private fun UserList(
+    users: LazyPagingItems<User>,
+    onUserClick: (user: User) -> Unit
+) {
     LazyColumn(
         Modifier.padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -88,7 +95,11 @@ private fun UserList(users: LazyPagingItems<User>) {
         items(users.itemCount, key = { index -> users[index]?.id ?: -1 }) { index ->
             val user = users[index]
             if (user != null) {
-                UserCard(user = user, modifier = Modifier.fillMaxWidth())
+                UserCard(
+                    user = user,
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onUserClick(user) }
+                )
             } else {
                 //TODO: add placeholder
             }
