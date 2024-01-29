@@ -77,6 +77,7 @@ private fun UserInfo(
     address: String
 ) {
     Column(
+        modifier = Modifier.padding(end = 15.dp),
         verticalArrangement = Arrangement.Center,
     ) {
 
