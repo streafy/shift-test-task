@@ -9,5 +9,6 @@ data class UserWithDetails(
     val phoneNumber: String,
     val dateOfBirth: String,
     val registered: String,
-    val gender: String
+    val gender: String,
+    val email: String
 )

@@ -115,7 +115,7 @@ private fun UserInfo(
         InfoField(name = "Gender", content = user.gender)
         InfoField(name = "Phone", content = user.phoneNumber, onClick = onPhoneNumberClick)
         InfoField(name = "Address", content = user.address, onClick = onAddressClick)
-        InfoField(name = "Email", content = "test@test.com", onClick = onEmailCLick)
+        InfoField(name = "Email", content = user.email, onClick = onEmailCLick)
         InfoField(name = "Date of birth", content = user.dateOfBirth)
         InfoField(name = "Registered", content = user.registered)
     }
