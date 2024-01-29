@@ -14,5 +14,6 @@ data class UserEntity(
     @ColumnInfo(name = "date_of_birth") val dateOfBirth: String,
     val registered: String,
     val phone: String,
-    @ColumnInfo(name = "photo_uri") val pictureUri: String
+    @ColumnInfo(name = "photo_uri") val pictureUri: String,
+    @ColumnInfo(defaultValue = "") val email: String
 )

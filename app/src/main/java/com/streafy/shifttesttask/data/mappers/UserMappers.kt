@@ -21,7 +21,8 @@ fun RemoteResponse.toUserEntityList() =
             dateOfBirth = userDto.dateOfBirth.date,
             registered = userDto.registered.date,
             phone = userDto.phone,
-            pictureUri = userDto.picture.pictureUri
+            pictureUri = userDto.picture.pictureUri,
+            email = userDto.email
         )
     }
 
