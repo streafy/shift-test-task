@@ -11,6 +11,7 @@ data class UserDto(
     @SerialName("dob") val dateOfBirth: DateWithAgeDto,
     val registered: DateWithAgeDto,
     val phone: String,
-    val picture: PictureDto
+    val picture: PictureDto,
+    val email: String
 )
 
