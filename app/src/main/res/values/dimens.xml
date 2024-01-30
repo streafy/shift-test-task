@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_padding">15dp</dimen>
+    <dimen name="title_padding">12dp</dimen>
+    <dimen name="container_horizontal_padding">16dp</dimen>
+
+    <dimen name="list_spacing">12dp</dimen>
+
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_height">100dp</dimen>
+
+    <dimen name="card_placeholder_text_spacing">8dp</dimen>
+    <dimen name="card_placeholder_text_width_small">200dp</dimen>
+    <dimen name="card_placeholder_text_width_medium">220dp</dimen>
+    <dimen name="card_placeholder_text_width_large">240dp</dimen>
+    <dimen name="card_placeholder_text_height">20dp</dimen>
+</resources>

@@ -20,8 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.streafy.shifttesttask.R
@@ -72,7 +72,9 @@ private fun Content(
     onEmailCLick: (email: String) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(horizontal = 16.dp),
+        modifier = Modifier.padding(horizontal = dimensionResource(
+            id = R.dimen.container_horizontal_padding)
+        ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TopBar(onBackClick)
@@ -106,7 +108,7 @@ private fun TopBar(
         }
         Text(
             text = stringResource(id = R.string.details_screen_title),
-            modifier = Modifier.padding(vertical = 12.dp),
+            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.title_padding)),
             style = MaterialTheme.typography.headlineLarge
         )
     }
