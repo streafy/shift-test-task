@@ -16,9 +16,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.streafy.shifttesttask.R
 import com.streafy.shifttesttask.domain.entity.UserWithDetails
@@ -34,7 +34,7 @@ fun UserDetailsCard(
     ElevatedCard(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
+            defaultElevation = dimensionResource(id = R.dimen.card_elevation)
         )
     ) {
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -113,7 +113,7 @@ private fun UserInfo(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(15.dp)
+            .padding(dimensionResource(id = R.dimen.card_padding))
             .verticalScroll(rememberScrollState()),
     ) {
         InfoField(

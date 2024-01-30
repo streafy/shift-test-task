@@ -19,11 +19,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.streafy.shifttesttask.R
 import com.streafy.shifttesttask.domain.entity.User
@@ -38,9 +38,9 @@ fun UserCard(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth(cardWidthFraction)
-            .height(100.dp),
+            .height(dimensionResource(id = R.dimen.card_height)),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
+            defaultElevation = dimensionResource(id = R.dimen.card_elevation)
         )
     ) {
         Row(
@@ -65,8 +65,8 @@ private fun UserPhoto(photoUri: String) {
         placeholder = painterResource(id = R.drawable.loading_image),
         contentScale = ContentScale.Crop,
         modifier = Modifier
-            .size(100.dp)
-            .padding(15.dp)
+            .size(dimensionResource(id = R.dimen.card_height))
+            .padding(dimensionResource(id = R.dimen.card_padding))
             .clip(CircleShape)
     )
 
@@ -80,7 +80,7 @@ private fun UserInfo(
     address: String
 ) {
     Column(
-        modifier = Modifier.padding(end = 15.dp),
+        modifier = Modifier.padding(end = dimensionResource(id = R.dimen.card_padding)),
         verticalArrangement = Arrangement.Center,
     ) {
 

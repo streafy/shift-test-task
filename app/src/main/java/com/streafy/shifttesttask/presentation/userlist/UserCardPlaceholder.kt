@@ -18,18 +18,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.streafy.shifttesttask.R
 
 @Composable
 fun UserCardPlaceholder(
     cardWidthFraction: Float = 1f
 ) {
     ElevatedCard(
-        modifier = Modifier.fillMaxWidth(cardWidthFraction)
-            .height(100.dp),
+        modifier = Modifier
+            .fillMaxWidth(cardWidthFraction)
+            .height(dimensionResource(id = R.dimen.card_height)),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
+            defaultElevation = dimensionResource(id = R.dimen.card_elevation)
         )
     ) {
         Row(
@@ -45,8 +47,8 @@ fun UserCardPlaceholder(
 private fun UserPhotoPlaceholder() {
     Box(
         modifier = Modifier
-            .size(100.dp)
-            .padding(15.dp)
+            .size(dimensionResource(id = R.dimen.card_height))
+            .padding(dimensionResource(id = R.dimen.card_padding))
             .clip(CircleShape)
             .background(Color.Gray)
     )
@@ -55,24 +57,26 @@ private fun UserPhotoPlaceholder() {
 @Composable
 private fun UserInfoPlaceholder() {
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(
+            dimensionResource(id = R.dimen.card_placeholder_text_spacing)
+        )
     ) {
         Box(
             modifier = Modifier
-                .width(220.dp)
-                .height(20.dp)
+                .width(dimensionResource(id = R.dimen.card_placeholder_text_width_medium))
+                .height(dimensionResource(id = R.dimen.card_placeholder_text_height))
                 .background(Color.Gray)
         )
         Box(
             modifier = Modifier
-                .width(200.dp)
-                .height(20.dp)
+                .width(dimensionResource(id = R.dimen.card_placeholder_text_width_small))
+                .height(dimensionResource(id = R.dimen.card_placeholder_text_height))
                 .background(Color.Gray)
         )
         Box(
             modifier = Modifier
-                .width(240.dp)
-                .height(20.dp)
+                .width(dimensionResource(id = R.dimen.card_placeholder_text_width_large))
+                .height(dimensionResource(id = R.dimen.card_placeholder_text_height))
                 .background(Color.Gray)
         )
     }
