@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">shift-test-task</string>
+    <string name="main_screen_title">User</string>
+    <string name="details_screen_title">Details</string>
+    <string name="error_message">Error occurred, swipe down to retry</string>
+    <string name="unknown_error_message">Unknown error</string>
+
+    <string name="full_name_title" >Full name</string>
+    <string name="gender_title">Gender</string>
+    <string name="phone_number_title">Phone</string>
+    <string name="address_title">Address</string>
+    <string name="email_title">Email</string>
+    <string name="date_of_birth_title">Date of birth</string>
+    <string name="registered_date_title">Registered</string>
 </resources>

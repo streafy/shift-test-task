@@ -21,12 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.streafy.shifttesttask.R
 import com.streafy.shifttesttask.domain.entity.User
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,11 +46,12 @@ fun UserListScreen(
     }
 
     val context = LocalContext.current
+    val errorMessage = stringResource(id = R.string.error_message)
     LaunchedEffect(key1 = users.loadState) {
         if (users.loadState.refresh is LoadState.Error) {
             Toast.makeText(
                 context,
-                "Error occurred, swipe down to retry",
+                errorMessage,
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -90,7 +93,7 @@ private fun UserList(
     ) {
         item {
             Text(
-                text = "Users",
+                text = stringResource(id = R.string.main_screen_title),
                 modifier = Modifier.padding(top = 12.dp),
                 style = MaterialTheme.typography.headlineLarge
             )

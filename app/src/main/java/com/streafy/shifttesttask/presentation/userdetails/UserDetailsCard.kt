@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.streafy.shifttesttask.R
@@ -115,13 +116,37 @@ private fun UserInfo(
             .padding(15.dp)
             .verticalScroll(rememberScrollState()),
     ) {
-        InfoField(name = "Full name", content = "${user.firstName} ${user.lastName}")
-        InfoField(name = "Gender", content = user.gender)
-        InfoField(name = "Phone", content = user.phoneNumber, onClick = onPhoneNumberClick)
-        InfoField(name = "Address", content = user.address, onClick = onAddressClick)
-        InfoField(name = "Email", content = user.email, onClick = onEmailCLick)
-        InfoField(name = "Date of birth", content = user.dateOfBirth)
-        InfoField(name = "Registered", content = user.registered)
+        InfoField(
+            name = stringResource(id = R.string.full_name_title),
+            content = "${user.firstName} ${user.lastName}"
+        )
+        InfoField(
+            name = stringResource(id = R.string.gender_title),
+            content = user.gender
+        )
+        InfoField(
+            name = stringResource(id = R.string.phone_number_title),
+            content = user.phoneNumber,
+            onClick = onPhoneNumberClick
+        )
+        InfoField(
+            name = stringResource(id = R.string.address_title),
+            content = user.address,
+            onClick = onAddressClick
+        )
+        InfoField(
+            name = stringResource(id = R.string.email_title),
+            content = user.email,
+            onClick = onEmailCLick
+        )
+        InfoField(
+            name = stringResource(id = R.string.date_of_birth_title),
+            content = user.dateOfBirth
+        )
+        InfoField(
+            name = stringResource(id = R.string.registered_date_title),
+            content = user.registered
+        )
     }
 }
 

@@ -25,7 +25,7 @@ class UserDetailsViewModel @Inject constructor(
                     _state.value = UserDetailsUiState.Content(user)
                 }
             } catch (e: Exception) {
-                _state.value = UserDetailsUiState.Error(e.message ?: "Unknown error")
+                _state.value = UserDetailsUiState.Error(e.message)
             }
         }
     }

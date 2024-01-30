@@ -20,9 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.streafy.shifttesttask.R
 import com.streafy.shifttesttask.domain.entity.UserWithDetails
 import com.streafy.shifttesttask.presentation.userdetails.intentactions.dialPhoneNumber
 import com.streafy.shifttesttask.presentation.userdetails.intentactions.sendEmailTo
@@ -52,7 +54,8 @@ fun UserDetailsScreen(
             )
         is UserDetailsUiState.Error ->
             ErrorContent(
-                errorMessage = stateValue.message,
+                errorMessage = stateValue.message
+                    ?: stringResource(id = R.string.unknown_error_message),
                 onRetry = { viewModel.loadUser(id) }
             )
         UserDetailsUiState.Initial -> Unit
@@ -102,7 +105,7 @@ private fun TopBar(
             )
         }
         Text(
-            text = "Details",
+            text = stringResource(id = R.string.details_screen_title),
             modifier = Modifier.padding(vertical = 12.dp),
             style = MaterialTheme.typography.headlineLarge
         )
