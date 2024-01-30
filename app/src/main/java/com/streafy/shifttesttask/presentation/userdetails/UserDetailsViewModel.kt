@@ -2,7 +2,7 @@ package com.streafy.shifttesttask.presentation.userdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.streafy.shifttesttask.domain.repository.UserRepository
+import com.streafy.shifttesttask.domain.usecase.GetUserByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserDetailsViewModel @Inject constructor(
-    private val repository: UserRepository
+    private val getUserByIdUseCase: GetUserByIdUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<UserDetailsUiState>(UserDetailsUiState.Initial)
@@ -21,7 +21,7 @@ class UserDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = UserDetailsUiState.Loading
             try {
-                repository.getUserById(id).collect { user ->
+                getUserByIdUseCase(id).collect { user ->
                     _state.value = UserDetailsUiState.Content(user)
                 }
             } catch (e: Exception) {
