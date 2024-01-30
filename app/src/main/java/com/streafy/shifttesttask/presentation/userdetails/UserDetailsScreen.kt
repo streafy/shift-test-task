@@ -19,21 +19,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.streafy.shifttesttask.R
 import com.streafy.shifttesttask.domain.entity.UserWithDetails
-import com.streafy.shifttesttask.presentation.userdetails.intentactions.dialPhoneNumber
-import com.streafy.shifttesttask.presentation.userdetails.intentactions.sendEmailTo
-import com.streafy.shifttesttask.presentation.userdetails.intentactions.showMap
 
 @Composable
 fun UserDetailsScreen(
     id: Int,
     onBackClick: () -> Unit,
+    onPhoneNumberClick: (phoneNumber: String) -> Unit,
+    onAddressClick: (address: String) -> Unit,
+    onEmailClick: (email: String) -> Unit,
     viewModel: UserDetailsViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle()
@@ -42,15 +41,14 @@ fun UserDetailsScreen(
         viewModel.loadUser(id)
     }
 
-    val context = LocalContext.current
     when (val stateValue = state.value) {
         is UserDetailsUiState.Content ->
             Content(
                 user = stateValue.user,
                 onBackClick = onBackClick,
-                onPhoneNumberClick = { phoneNumber -> dialPhoneNumber(phoneNumber, context) },
-                onAddressClick = { address -> showMap(address, context) },
-                onEmailCLick = { email -> sendEmailTo(email, context) }
+                onPhoneNumberClick = onPhoneNumberClick,
+                onAddressClick = onAddressClick,
+                onEmailCLick = onEmailClick
             )
         is UserDetailsUiState.Error ->
             ErrorContent(

@@ -7,6 +7,9 @@ import com.streafy.shifttesttask.navigation.destinations.MAIN_SCREEN_ROUTE
 import com.streafy.shifttesttask.navigation.destinations.details
 import com.streafy.shifttesttask.navigation.destinations.main
 import com.streafy.shifttesttask.navigation.destinations.navigateToDetails
+import com.streafy.shifttesttask.navigation.intentactions.dialPhoneNumber
+import com.streafy.shifttesttask.navigation.intentactions.sendEmailTo
+import com.streafy.shifttesttask.navigation.intentactions.showMap
 
 @Composable
 fun AppNavigation(
@@ -22,7 +25,10 @@ fun AppNavigation(
             }
         )
         details(
-            onBackClick = navController::popBackStack
+            onBackClick = navController::popBackStack,
+            onPhoneNumberClick = ::dialPhoneNumber,
+            onAddressClick = ::showMap,
+            onEmailClick = ::sendEmailTo
         )
     }
 }
