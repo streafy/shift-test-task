@@ -1,4 +1,4 @@
-package com.streafy.shifttesttask.presentation.userdetails.intentactions
+package com.streafy.shifttesttask.navigation.intentactions
 
 import android.content.Context
 import android.content.Intent
