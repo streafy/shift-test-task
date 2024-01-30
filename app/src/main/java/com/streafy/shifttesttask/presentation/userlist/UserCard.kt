@@ -19,11 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.streafy.shifttesttask.R
 import com.streafy.shifttesttask.domain.entity.User
 
 @Composable
@@ -60,6 +62,7 @@ private fun UserPhoto(photoUri: String) {
     AsyncImage(
         model = photoUri,
         contentDescription = null,
+        placeholder = painterResource(id = R.drawable.loading_image),
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .size(100.dp)

@@ -16,8 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.streafy.shifttesttask.R
 import com.streafy.shifttesttask.domain.entity.UserWithDetails
 
 @Composable
@@ -62,6 +64,7 @@ private fun VerticalContent(
     AsyncImage(
         model = user.photoUri,
         contentDescription = null,
+        placeholder = painterResource(id = R.drawable.loading_image),
         modifier = Modifier
             .fillMaxWidth(),
         contentScale = ContentScale.FillWidth
@@ -85,6 +88,7 @@ private fun HorizontalContent(
         AsyncImage(
             model = user.photoUri,
             contentDescription = null,
+            placeholder = painterResource(id = R.drawable.loading_image),
             modifier = Modifier
                 .fillMaxHeight(),
             contentScale = ContentScale.FillHeight
